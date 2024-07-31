@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PeralatanMesinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // redirect ke halaman peralatan-mesin
+    return redirect('/peralatan-mesin');
 });
+
+Route::get('/peralatan-mesin', [PeralatanMesinController::class, 'index'])->name('peralatan-mesin');
+
+Route::post('/peralatan-mesin', [PeralatanMesinController::class, 'store'])->name('peralatan-mesin.store');
+
+Route::delete('/peralatan-mesin/{id}', [PeralatanMesinController::class, 'delete'])->name('peralatan-mesin.delete');
+
+Route::put('/peralatan-mesin/{id}', [PeralatanMesinController::class, 'update'])->name('peralatan-mesin.update');
