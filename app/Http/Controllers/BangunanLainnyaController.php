@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\PeralatanMesinExport;
+use App\Exports\BangunanLainnyaExport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\PeralatanMesinModel;
+use App\Models\BangunanLainnyaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class PeralatanMesinController extends Controller
+class BangunanLainnyaController extends Controller
 {
     public function index()
     {
         // get all data from peralatan_mesin table
-        $peralatanMesin = PeralatanMesinModel::all();
+        $bangunanLainnya = BangunanLainnyaModel::all();
 
-        return view('peralatan-mesin', compact('peralatanMesin'));
+        return view('bangunan-lainnya', compact('bangunanLainnya'));
     }
 
     public function store(Request $request)
@@ -24,9 +24,9 @@ class PeralatanMesinController extends Controller
         $req = $request->all();
 
         // check duplicate kode_barang
-        $isExist = PeralatanMesinModel::where('kode_barang', $req['kode_barang'])->first();
+        $isExist = BangunanLainnyaModel::where('kode_barang', $req['kode_barang'])->first();
         if ($isExist) {
-            return Redirect::route('peralatan-mesin')->with('error', 'Barang dengan kode ' . $req['kode_barang'] . ' sudah ada');
+            return Redirect::route('bangunan-lainnya')->with('error', 'Barang dengan kode ' . $req['kode_barang'] . ' sudah ada');
         }
 
         // check kode
@@ -59,32 +59,32 @@ class PeralatanMesinController extends Controller
             "keterangan" => $req['keterangan']
         ];
 
-        $res = PeralatanMesinModel::create($data_input);
+        $res = BangunanLainnyaModel::create($data_input);
         // check if data is successfully created
         if (!$res) {
-            return Redirect::route('peralatan-mesin')->with('error', 'Gagal menambahkan data');
+            return Redirect::route('bangunan-lainnya')->with('error', 'Gagal menambahkan data');
         }
 
-        return Redirect::route('peralatan-mesin');
+        return Redirect::route('bangunan-lainnya');
     }
 
     public function delete($id)
     {
-        PeralatanMesinModel::destroy($id);
+        BangunanLainnyaModel::destroy($id);
 
-        return Redirect::route('peralatan-mesin');
+        return Redirect::route('bangunan-lainnya');
     }
 
     public function update(Request $request, $id)
     {
-        $peralatanMesin = PeralatanMesinModel::find($id);
+        $BangunanLainnya = BangunanLainnyaModel::find($id);
         // mapping request data to model
         $req = $request->all();
 
         // check duplicate kode_barang except current data
-        $isExist = PeralatanMesinModel::where('kode_barang', $req['kode_barang'])->where('id', '!=', $id)->first();
+        $isExist = BangunanLainnyaModel::where('kode_barang', $req['kode_barang'])->where('id', '!=', $id)->first();
         if ($isExist) {
-            return Redirect::route('peralatan-mesin')->with('error', 'Barang dengan kode ' . $req['kode_barang'] . ' sudah ada');
+            return Redirect::route('bangunan-lainnya')->with('error', 'Barang dengan kode ' . $req['kode_barang'] . ' sudah ada');
         }
 
         // check kode
@@ -117,13 +117,13 @@ class PeralatanMesinController extends Controller
             "keterangan" => $req['keterangan']
         ];
 
-        $res = $peralatanMesin->update($data_update);
+        $res = $BangunanLainnya->update($data_update);
         // check if data is successfully updated
         if (!$res) {
-            return Redirect::route('peralatan-mesin')->with('error', 'Gagal mengubah data');
+            return Redirect::route('bangunan-lainnya')->with('error', 'Gagal mengubah data');
         }
 
-        return Redirect::route('peralatan-mesin');
+        return Redirect::route('bangunan-lainnya');
     }
 
     public function export()
@@ -135,6 +135,6 @@ class PeralatanMesinController extends Controller
         ];
         // tanggal sekarang
         $tanggal = date('d') . '_' . strtolower($bulan[date('n') - 1]) . '_' . date('Y');
-        return Excel::download(new PeralatanMesinExport(), 'laporan_peralatan_mesin_' . $tanggal . '.xlsx');
+        return Excel::download(new BangunanLainnyaExport(), 'laporan_bangunan_lainnya_' . $tanggal . '.xlsx');
     }
 }

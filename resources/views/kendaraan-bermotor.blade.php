@@ -5,9 +5,9 @@
             <img src="{{ asset('image/logo.png') }}" alt="Logo Bangli" class="img-fluid" width="150">
         </div>
         <ul class="list-unstyled border-top pt-4 ps-3 pe-3">
-            <li><a href="#" class="d-block text-white rounded p-2 fw-bold bg-primary mt-2" style="text-decoration: none; font-size: small;">PERALATAN DAN MESIN</a></li>
+            <li><a href="{{ route('peralatan-mesin') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">PERALATAN DAN MESIN</a></li>
             <li><a href="{{ route('bangunan-lainnya') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">BANGUNAN LAINNYA</a></li>
-            <li><a href="{{ route('kendaraan-bermotor') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">KENDARAAN BERMOTOR</a></li>
+            <li><a href="#" class="d-block text-white rounded p-2 fw-bold bg-primary mt-2" style="text-decoration: none; font-size: small;">KENDARAAN BERMOTOR</a></li>
         </ul>
     </div>
 
@@ -31,7 +31,7 @@
             <div class="d-flex">
                 <div class="text-start p-3 fs-4">Laporan Inventaris Desa Berupa Peralatan dan Mesin</div>
 
-                <form class="text-end pt-3 pb-3 ps-3" action="{{ route('peralatan-mesin.export') }}" method="GET">
+                <form class="text-end pt-3 pb-3 ps-3" action="{{ route('kendaraan-bermotor.export') }}" method="GET">
                     <button type="submit" class="btn btn-success shadow-sm" style="color: white;">Unduh Laporan</button>
                 </form>
                 <div class="text-end pt-3 pb-3 pe-5 flex-fill">
@@ -66,7 +66,7 @@
                         @php
                         $no = 1;
                         @endphp
-                        @foreach ($peralatanMesin as $item)
+                        @foreach ($kendaraanBermotor as $item)
                         <tr class="text-center align-middle" style="font-size: small;">
                             <th scope="row">{{$no}}</th>
                             <td>{{$item->nama_barang}}</td>
@@ -104,7 +104,7 @@
                                 <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editDataModal{{$item->id}}">
                                     Ubah
                                 </button>
-                                <form method="POST" action="{{ route('peralatan-mesin.delete', $item->id) }}" style="display: inline;">
+                                <form method="POST" action="{{ route('kendaraan-bermotor.delete', $item->id) }}" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="buttom" class="btn btn-danger btn-sm" onclick="confirmation(event)">Hapus</button>
@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <!-- Form -->
-                                            <form id="editDataForm" method="POST" action="{{ route('peralatan-mesin.update', $item->id) }}">
+                                            <form id="editDataForm" method="POST" action="{{ route('kendaraan-bermotor.update', $item->id) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="mb-2">
@@ -206,7 +206,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Form -->
-                    <form id="addDataForm" method="POST" action="{{ route('peralatan-mesin.store') }}">
+                    <form id="addDataForm" method="POST" action="{{ route('kendaraan-bermotor.store') }}">
                         @csrf
                         <div class="mb-2">
                             <label for="namaBarang" class="form-label">Nama Barang</label>

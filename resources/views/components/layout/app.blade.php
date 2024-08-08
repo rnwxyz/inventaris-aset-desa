@@ -58,39 +58,9 @@
 </head>
 
 <body>
-    <!-- sidebar-->
-    <div class="main-content">
-        <!-- Sidebar -->
-        <div id="sidebar" class="bg-white">
-            <div class="container ps-5 pb-4 pe-4 pt-4">
-                <img src="{{ asset('image/logo.png') }}" alt="Logo Bangli" class="img-fluid" width="150">
-            </div>
-            <ul class="list-unstyled border-top pt-4 ps-3 pe-3">
-                <li><a href="#" class="d-block text-white rounded p-2 fw-bold bg-primary mt-2" style="text-decoration: none; font-size: small;">PERALATAN DAN MESIN</a></li>
-                <li><a href="#" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">BANGUNAN LAINNYA</a></li>
-                <li><a href="#" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">KENDARAAN BERMOTOR</a></li>
-                <li><a href="#" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">REKAPITULASI ASET</a></li>
-            </ul>
-        </div>
-
-        <!-- Main Content -->
-        <!-- headers -->
-        <div class="main-container">
-            <header class="m-2">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container d-flex">
-                        <a class="navbar-brand flex-fill fs-2" href="#">{{ config('app.name', 'Laravel') }}</a>
-                    </div>
-                </nav>
-            </header>
-            <div id="slot" class="pb-4">
-                {{ $slot }}
-            </div>
-        </div>
+    <div id="slot" class="main-content">
+        {{ $slot }}
     </div>
-
-
-
 </body>
 
 </html>
