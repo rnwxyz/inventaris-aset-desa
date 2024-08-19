@@ -8,6 +8,7 @@
             <li><a href="{{ route('peralatan-mesin') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">PERALATAN DAN MESIN</a></li>
             <li><a href="{{ route('bangunan-lainnya') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">BANGUNAN LAINNYA</a></li>
             <li><a href="#" class="d-block text-white rounded p-2 fw-bold bg-primary mt-2" style="text-decoration: none; font-size: small;">KENDARAAN BERMOTOR</a></li>
+            <li><a href="{{ route('aset-tanah') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">ASET TANAH</a></li>
         </ul>
     </div>
 
@@ -53,8 +54,8 @@
                             <th rowspan="2" scope="col" style="width: 5%;">Tahun Perolehan</th>
                             <th rowspan="2" scope="col" style="width: 10%;">Nilai Perolehan</th>
                             <th colspan="3" scope="col" style="width: 10%;">Kode Barang</th>
-                            <th rowspan="2" scope="col" style="width: 14%;">Keterangan</th>
-                            <th rowspan="2" scope="col" style="width: 11%;">Aksi</th>
+                            <th rowspan="2" scope="col" style="width: 12%;">Keterangan</th>
+                            <th rowspan="2" scope="col" style="width: 13%;">Aksi</th>
                         </tr>
                         <tr class="text-center align-middle" style="font-size: small;">
                             <th scope="col">B</th>

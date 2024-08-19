@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeralatanMesinController;
 use App\Http\Controllers\BangunanLainnyaController;
 use App\Http\Controllers\KendaraanBermotorController;
+use App\Http\Controllers\AsetTanahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,10 @@ Route::delete('/kendaraan-bermotor/{id}', [KendaraanBermotorController::class, '
 Route::put('/kendaraan-bermotor/{id}', [KendaraanBermotorController::class, 'update'])->name('kendaraan-bermotor.update');
 Route::put('/kendaraan-bermotor/{id}', [KendaraanBermotorController::class, 'update'])->name('kendaraan-bermotor.update');
 Route::get('/kendaraan-bermotor/export', [KendaraanBermotorController::class, 'export'])->name('kendaraan-bermotor.export');
+
+Route::get('/aset-tanah', [AsetTanahController::class, 'index'])->name('aset-tanah');
+Route::post('/aset-tanah', [AsetTanahController::class, 'store'])->name('aset-tanah.store');
+Route::delete('/aset-tanah/{id}', [AsetTanahController::class, 'delete'])->name('aset-tanah.delete');
+Route::put('/aset-tanah/{id}', [AsetTanahController::class, 'update'])->name('aset-tanah.update');
+Route::put('/aset-tanah/{id}', [AsetTanahController::class, 'update'])->name('aset-tanah.update');
+Route::get('/aset-tanah/export', [AsetTanahController::class, 'export'])->name('aset-tanah.export');

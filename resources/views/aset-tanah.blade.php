@@ -6,9 +6,9 @@
         </div>
         <ul class="list-unstyled border-top pt-4 ps-3 pe-3">
             <li><a href="{{ route('peralatan-mesin') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">PERALATAN DAN MESIN</a></li>
-            <li><a href="#" class="d-block text-white rounded p-2 fw-bold bg-primary mt-2" style="text-decoration: none; font-size: small;">BANGUNAN LAINNYA</a></li>
+            <li><a href="{{ route('bangunan-lainnya') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">BANGUNAN LAINNYA</a></li>
             <li><a href="{{ route('kendaraan-bermotor') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">KENDARAAN BERMOTOR</a></li>
-            <li><a href="{{ route('aset-tanah') }}" class="d-block text-dark p-2 fw-bold mt-2 hover-effect" style="text-decoration: none; font-size: small;">ASET TANAH</a></li>
+            <li><a href="#" class="d-block text-white rounded p-2 fw-bold bg-primary mt-2" style="text-decoration: none; font-size: small;">ASET TANAH</a></li>
         </ul>
     </div>
 
@@ -30,9 +30,9 @@
             </div>
             @endif
             <div class="d-flex">
-                <div class="text-start p-3 fs-4">Laporan Inventaris Desa Berupa Bangunan Lainnya</div>
+                <div class="text-start p-3 fs-4">Laporan Inventaris Desa Berupa Aset Tanah</div>
 
-                <form class="text-end pt-3 pb-3 ps-3" action="{{ route('bangunan-lainnya.export') }}" method="GET">
+                <form class="text-end pt-3 pb-3 ps-3" action="{{ route('aset-tanah.export') }}" method="GET">
                     <button type="submit" class="btn btn-success shadow-sm" style="color: white;">Unduh Laporan</button>
                 </form>
                 <div class="text-end pt-3 pb-3 pe-5 flex-fill">
@@ -47,65 +47,45 @@
                     <thead>
                         <tr class="text-center align-middle bg-blue" style="font-size: small;">
                             <th rowspan="2" scope="col" style="width: 5%;">No</th>
-                            <th rowspan="2" scope="col" style="width: 15%;">Nama Barang</th>
-                            <th rowspan="2" scope="col" style="width: 10%;">Kode Barang</th>
-                            <th rowspan="2" scope="col" style="width: 5%;">NUP</th>
-                            <th rowspan="2" scope="col" style="width: 5%;">Merk/Type</th>
-                            <th rowspan="2" scope="col" style="width: 5%;">Tahun Perolehan</th>
-                            <th rowspan="2" scope="col" style="width: 10%;">Nilai Perolehan</th>
-                            <th colspan="3" scope="col" style="width: 10%;">Kode Barang</th>
+                            <th rowspan="2" scope="col" style="width: 15%;">Jenis Barang</th>
+                            <th rowspan="2" scope="col" style="width: 10%;">Identitas Barang</th>
+                            <th colspan="3" scope="col" style="width: 15%;">Asal Usul Barang</th>
+                            <th rowspan="2" scope="col" style="width: 10%;">Tanggal Bulan Tahun Perolehan/Pembelian</th>
+                            <th rowspan="2" scope="col" style="width: 10%;">Harga/Nilai Perolehan</th>
+                            <th rowspan="2" scope="col" style="width: 10%;">Perkiraan Harga/Nilai Sekarang</th>
                             <th rowspan="2" scope="col" style="width: 13%;">Keterangan</th>
                             <th rowspan="2" scope="col" style="width: 12%;">Aksi</th>
                         </tr>
                         <tr class="text-center align-middle" style="font-size: small;">
-                            <th scope="col">B</th>
-                            <th scope="col">RR</th>
-                            <th scope="col">RB</th>
+                            <th scope="col">APBD</th>
+                            <th scope="col">Perolehan Lain Yang Sah</th>
+                            <th scope="col">Aset atau Kekayaan Asli Desa</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                         $no = 1;
                         @endphp
-                        @foreach ($bangunanLainnya as $item)
+                        @foreach ($asetTanah as $item)
                         <tr class="text-center align-middle" style="font-size: small;">
                             <th scope="row">{{$no}}</th>
-                            <td>{{$item->nama_barang}}</td>
-                            <td>{{$item->kode_barang}}</td>
-                            <td>{{$item->nup}}</td>
-                            <td>{{$item->merk}}</td>
-                            <td>{{$item->tahun_perolehan}}</td>
+                            <td>{{$item->jenis_barang}}</td>
+                            <td>{{$item->identitas_barang}}</td>
+                            <td>{{$item->apbd}}</td>
+                            <td>{{$item->perolehan_lain_yang_sah}}</td>
+                            <td>{{$item->aset_atau_kekayaan_asli_desa}}</td>
+                            <td>{{$item->tanggal_bulan_tahun_perolehan}}</td>
+                            <td>{{$item->harga_nilai_perolehan}}</td>
+                            <td>{{$item->perkiraan_harga_nilai_sekarang}}</td>
                             @php
                             $nilai = $item->nilai_perolehan ? 'Rp ' . number_format($item->nilai_perolehan, 0, ',', '.') : '';
                             @endphp
-                            <td>{{$nilai}}</td>
-                            <td>
-                                @if ($item->b)
-                                <img src="{{ asset('image/check.png') }}" alt="Check B" width="15">
-                                @else
-                                <div></div>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($item->rr)
-                                <img src="{{ asset('image/check.png') }}" alt="Check RR" width="15">
-                                @else
-                                <div></div>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($item->rb)
-                                <img src="{{ asset('image/check.png') }}" alt="Check RB" width="15">
-                                @else
-                                <div></div>
-                                @endif
-                            </td>
                             <td>{{$item->keterangan}}</td>
                             <td>
                                 <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editDataModal{{$item->id}}">
                                     Ubah
                                 </button>
-                                <form method="POST" action="{{ route('bangunan-lainnya.delete', $item->id) }}" style="display: inline;">
+                                <form method="POST" action="{{ route('aset-tanah.delete', $item->id) }}" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="buttom" class="btn btn-danger btn-sm" onclick="confirmation(event)">Hapus</button>
@@ -122,56 +102,45 @@
                                         </div>
                                         <div class="modal-body">
                                             <!-- Form -->
-                                            <form id="editDataForm" method="POST" action="{{ route('bangunan-lainnya.update', $item->id) }}">
+                                            <form id="editDataForm" method="POST" action="{{ route('aset-tanah.update', $item->id) }}">
                                                 @csrf
                                                 @method('PUT')
-                                                <div class="mb-2">
-                                                    <label for="namaBarang" class="form-label">Nama Barang</label>
-                                                    <input type="text" class="form-control" id="namaBarang" name="nama_barang" required value="{{$item->nama_barang}}">
-                                                </div>
                                                 <div class="d-flex">
                                                     <div class="mb-2 me-2">
-                                                        <label for="kodeBarang" class="form-label">Kode Barang</label>
-                                                        <input type="text" class="form-control" id="kodeBarang" name="kode_barang" required value="{{$item->kode_barang}}">
+                                                        <label for="jenisBarang" class="form-label">Jenis Barang</label>
+                                                        <input type="text" class="form-control" id="jenisBarang" name="jenis_barang" required value="{{$item->jenis_barang}}">
                                                     </div>
                                                     <div class="mb-2">
-                                                        <label for="nup" class="form-label">NUP</label>
-                                                        <input type="text" class="form-control" id="nup" name="nup" required value="{{$item->nup}}">
+                                                        <label for="identitasBarang" class="form-label">Identitas Barang</label>
+                                                        <input type="text" class="form-control" id="identitasBarang" name="identitas_barang" required value="{{$item->identitas_barang}}">
                                                     </div>
                                                 </div>
+                                                <div>Asal Usul Barang</div>
                                                 <div class="d-flex">
                                                     <div class="mb-2 me-2">
-                                                        <label for="merkType" class="form-label">Merk/Type</label>
-                                                        <input type="text" class="form-control" id="merkType" name="merk" required value="{{$item->merk}}">
+                                                        <label for="apbd" class="form-label">APBD</label>
+                                                        <input type="text" class="form-control" id="apbd" name="apbd" required value="{{$item->apbd}}">
+                                                    </div>
+                                                    <div class="mb-2 me-2">
+                                                        <label for="perolehanLain" class="form-label">Perolehan Lain</label>
+                                                        <input type="text" class="form-control" id="perolehanLain" name="perolehan_lain_yang_sah" required value="{{$item->perolehan_lain_yang_sah}}">
                                                     </div>
                                                     <div class="mb-2">
-                                                        <label for="tahunPerolehan" class="form-label">Tahun Perolehan</label>
-                                                        <input type="number" min="1900" max="3000" class="form-control" id="tahunPerolehan" name="tahun_perolehan" required value="{{$item->tahun_perolehan}}">
+                                                        <label for="kekayaanDesa" class="form-label">Kekayaan Asli Desa</label>
+                                                        <input type="text" class="form-control" id="kekayaanDesa" name="aset_atau_kekayaan_asli_desa" required value="{{$item->aset_atau_kekayaan_asli_desa}}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="nilaiPerolehan" class="form-label">Nilai Perolehan</label>
-                                                    <input type="number" class="form-control" id="nilaiPerolehan" name="nilai_perolehan" required value="{{$item->nilai_perolehan}}">
+                                                    <label for="tgl" class="form-label">Tanggal Bulan Tahun Perolehan</label>
+                                                    <input type="text" class="form-control" id="tgl" name="tanggal_bulan_tahun_perolehan" required value="{{$item->tanggal_bulan_tahun_perolehan}}">
                                                 </div>
                                                 <div class="mb-2">
-                                                    <div>Kode Barang</div>
-                                                    <div>
-                                                        <!-- checkbox input -->
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="kodeBarangB" name="kode_barang_b" value="B" @if ($item->b) checked @endif>
-                                                            <label class="form-check-label" for="kodeBarangB">B</label>
-                                                        </div>
-                                                        <!-- checkbox input -->
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="kodeBarangRR" name="kode_barang_rr" value="RR" @if ($item->rr) checked @endif>
-                                                            <label class="form-check-label" for="kodeBarangRR">RR</label>
-                                                        </div>
-                                                        <!-- checkbox input -->
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="kodeBarangRB" name="kode_barang_rb" value="RB" @if ($item->rb) checked @endif>
-                                                            <label class="form-check-label" for="kodeBarangRB">RB</label>
-                                                        </div>
-                                                    </div>
+                                                    <label for="nilaiPerolehan" class="form-label">Harga Nilai Perolehan</label>
+                                                    <input type="text" class="form-control" id="nilaiPerolehan" name="harga_nilai_perolehan" required value="{{$item->harga_nilai_perolehan}}">
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="nilaiSekarang" class="form-label">Perkiraan Nilai Sekarang</label>
+                                                    <input type="text" class="form-control" id="nilaiSekarang" name="perkiraan_harga_nilai_sekarang" required value="{{$item->perkiraan_harga_nilai_sekarang}}">
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="keterangan" class="form-label">Keterangan</label>
@@ -207,55 +176,44 @@
                 </div>
                 <div class="modal-body">
                     <!-- Form -->
-                    <form id="addDataForm" method="POST" action="{{ route('bangunan-lainnya.store') }}">
+                    <form id="addDataForm" method="POST" action="{{ route('aset-tanah.store') }}">
                         @csrf
-                        <div class="mb-2">
-                            <label for="namaBarang" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control" id="namaBarang" name="nama_barang" required>
-                        </div>
                         <div class="d-flex">
                             <div class="mb-2 me-2">
-                                <label for="kodeBarang" class="form-label">Kode Barang</label>
-                                <input type="text" class="form-control" id="kodeBarang" name="kode_barang" required>
+                                <label for="jenisBarang" class="form-label">Jenis Barang</label>
+                                <input type="text" class="form-control" id="jenisBarang" name="jenis_barang" required>
                             </div>
                             <div class="mb-2">
-                                <label for="nup" class="form-label">NUP</label>
-                                <input type="text" class="form-control" id="nup" name="nup" required>
+                                <label for="identitasBarang" class="form-label">Identitas Barang</label>
+                                <input type="text" class="form-control" id="identitasBarang" name="identitas_barang" required>
                             </div>
                         </div>
+                        <div>Asal Usul Barang</div>
                         <div class="d-flex">
                             <div class="mb-2 me-2">
-                                <label for="merkType" class="form-label">Merk/Type</label>
-                                <input type="text" class="form-control" id="merkType" name="merk" required>
+                                <label for="apbd" class="form-label">APBD</label>
+                                <input type="text" class="form-control" id="apbd" name="apbd" required>
+                            </div>
+                            <div class="mb-2 me-2">
+                                <label for="perolehanLain" class="form-label">Perolehan Lain</label>
+                                <input type="text" class="form-control" id="perolehanLain" name="perolehan_lain_yang_sah" required>
                             </div>
                             <div class="mb-2">
-                                <label for="tahunPerolehan" class="form-label">Tahun Perolehan</label>
-                                <input type="number" min="1900" max="3000" class="form-control" id="tahunPerolehan" name="tahun_perolehan" required>
+                                <label for="kekayaanDesa" class="form-label">Kekayaan Asli Desa</label>
+                                <input type="text" class="form-control" id="kekayaanDesa" name="aset_atau_kekayaan_asli_desa" required>
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label for="nilaiPerolehan" class="form-label">Nilai Perolehan</label>
-                            <input type="number" class="form-control" id="nilaiPerolehan" name="nilai_perolehan" required>
+                            <label for="tgl" class="form-label">Tanggal Bulan Tahun Perolehan</label>
+                            <input type="text" class="form-control" id="tgl" name="tanggal_bulan_tahun_perolehan" required>
                         </div>
                         <div class="mb-2">
-                            <div>Kode Barang</div>
-                            <div>
-                                <!-- checkbox input -->
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="kodeBarangB" name="kode_barang_b" value="B">
-                                    <label class="form-check-label" for="kodeBarangB">B</label>
-                                </div>
-                                <!-- checkbox input -->
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="kodeBarangRR" name="kode_barang_rr" value="RR">
-                                    <label class="form-check-label" for="kodeBarangRR">RR</label>
-                                </div>
-                                <!-- checkbox input -->
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="kodeBarangRB" name="kode_barang_rb" value="RB">
-                                    <label class="form-check-label" for="kodeBarangRB">RB</label>
-                                </div>
-                            </div>
+                            <label for="nilaiPerolehan" class="form-label">Harga Nilai Perolehan</label>
+                            <input type="text" class="form-control" id="nilaiPerolehan" name="harga_nilai_perolehan" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="nilaiSekarang" class="form-label">Perkiraan Nilai Sekarang</label>
+                            <input type="text" class="form-control" id="nilaiSekarang" name="perkiraan_harga_nilai_sekarang" required>
                         </div>
                         <div class="mb-2">
                             <label for="keterangan" class="form-label">Keterangan</label>
